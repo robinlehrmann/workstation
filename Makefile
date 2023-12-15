@@ -3,7 +3,7 @@ help:                                                                           
 
 ANSIBLE_PLAYBOOK_CMD = ansible-playbook -u root -i inventory/local
 
-install-ansible:
+install-ansible:                                         ## install ansible locally
 	curl https://bootstrap.pypa.io/get-pip.py | sudo -H python3
 	python3 -m pip install ansible
 
