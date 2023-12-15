@@ -5,13 +5,11 @@
       include_role:
         name: system
         vars_from: "{{ ansible_distribution }}"
-#    - name: ensure zsh is installed
-#      include_role:
-#        name: zsh
-#        apply:
-#          become: true
-#    - name: ensure docker is installed
-#      include_role:
-#        name: docker
-#        apply:
-#          become: true
+    - name: ensure zsh is installed
+      include_role:
+        name: zsh
+        vars_from: "{{ ansible_distribution }}"
+    - name: ensure git is installed
+      include_role:
+        name: git
+        vars_from: "{{ ansible_distribution }}"

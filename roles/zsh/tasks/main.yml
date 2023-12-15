@@ -1,0 +1,35 @@
+---
+- include_tasks: "{{ ansible_distribution }}.yml"
+
+- name: oh-my-zsh is installed
+  stat:
+    path: "{{ home_directory }}/.oh-my-zsh"
+  register: ohmyzsh
+
+- name: download ohmyzsh
+  get_url:
+    url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+    dest: "{{ zsh_tmp_path }}/zsh-install.sh"
+    mode: '0400'
+  when: ohmyzsh.stat.exists is defined and not ohmyzsh.stat.exists
+
+- name: install ohmyzsh
+  command: "sh {{ zsh_tmp_path }}/zsh-install.sh --unattended"
+  when: ohmyzsh.stat.exists is defined and not ohmyzsh.stat.exists
+
+- name: remove zsh install script
+  file:
+    path: "{{ zsh_tmp_path }}/zsh-install.sh"
+    state: absent
+
+- name: "change shell of {{ user }} user"
+  user:
+    name: "{{ user }}"
+    shell: /bin/zsh
+
+- name: change oh-my-zsh theme
+  lineinfile:
+    path: "{{ home_directory }}/.zshrc"
+    regexp: '^ZSH_THEME'
+    line: 'ZSH_THEME="{{ zsh_theme }}"'
+    create: yes

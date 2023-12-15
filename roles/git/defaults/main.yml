@@ -1,0 +1,38 @@
+---
+gitignore_settings:
+  - .idea
+  - .DS_Store
+
+git_profiles:
+  - name: work
+    email: lehrmann@billiger-mietwagen.de
+    username: Robin Lehrmann
+  - name: home
+    email: robin.lehrmann@developer.nrw
+    username: Robin Lehrmann
+
+gitconfig_sections:
+  - section: "push"
+    settings:
+      - key: "default"
+        value: "current"
+  - section: "rerere"
+    settings:
+      - key: "enabled"
+        value: "true"
+  - section: "alias"
+    settings:
+      - key: "st"
+        value: "status"
+      - key: "co"
+        value: "checkout"
+      - key: "br"
+        value: "branch"
+      - key: "ci"
+        value: "commit"
+  - section: "core"
+    settings:
+      - key: "editor"
+        value: "nano"
+      - key: "excludesFile"
+        value: "~/.gitignore"

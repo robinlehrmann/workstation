@@ -1,0 +1,12 @@
+---
+zsh_theme: agnoster
+zsh_plugins:
+  - git
+  - ansible
+  - aws
+  - brew
+  - docker
+  - docker-compose
+  - pip
+  - symfony
+  - zsh-interactive-cd

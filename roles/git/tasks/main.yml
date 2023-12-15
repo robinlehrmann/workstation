@@ -1,0 +1,33 @@
+---
+- name: Ensure gitconfig section exists
+  lineinfile:
+    path: "{{ home_directory }}/.gitconfig"
+    line: "[{{ item.section }}]"
+    insertbefore: "^\\[.*\\]$"
+    state: present
+    create: yes
+  loop: "{{ gitconfig_sections }}"
+
+- name: Ensure gitconfig setting exists
+  lineinfile:
+    path: "{{ home_directory }}/.gitconfig"
+    line: "    {{ item[1].key }} = {{ item[1].value }}"
+    regexp: '^\\s*{{ item[1].key }} ='
+    insertafter: "\\[{{ item[0].section }}\\]"
+    state: present
+    create: yes
+  loop: "{{ gitconfig_sections | subelements('settings') }}"
+
+- name: Ensure global gitignore exists
+  lineinfile:
+    path: "{{ home_directory }}/.gitignore"
+    line: "{{ item }}"
+    regexp: "^{{ item }}"
+    state: present
+    create: yes
+  loop: "{{ gitignore_settings }}"
+
+- name: Ensure gitprofiles exists
+  template:
+    src: gitprofiles.j2
+    dest: "{{ home_directory }}/.gitprofile"

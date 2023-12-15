@@ -1,0 +1,16 @@
+{
+  "profiles": {
+{% for profile in git_profiles %}
+    "{{ profile.name }}": [
+      {
+        "key": "user.email",
+        "value": "{{ profile.email }}"
+      },
+      {
+        "key": "user.name",
+        "value": "{{ profile.username }}"
+      }
+    ]{% if not loop.last%},{% endif %}
+{% endfor %}
+  }
+}
