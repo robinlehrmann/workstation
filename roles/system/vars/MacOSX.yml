@@ -1,0 +1,19 @@
+---
+packages:
+  - curl
+  - htop
+  - awscli
+  - git-profile
+  - mysql-client
+  - protobuf
+  - pwgen
+
+cask_packages:
+  - iterm2
+  - docker
+  - slack
+  - adoptopenjdk8
+  - jetbrains-toolbox
+  - rectangle
+  - spotify
+  - commander-one

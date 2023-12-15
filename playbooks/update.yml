@@ -1,0 +1,10 @@
+---
+- hosts: local
+  tasks:
+    - name: update packages
+      community.general.homebrew:
+        update_homebrew: true
+
+    - name: upgrade packages
+      community.general.homebrew:
+        upgrade_all: true

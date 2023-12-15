@@ -1,0 +1,26 @@
+---
+- name: install packages
+  community.general.homebrew:
+    name: "{{ packages }}"
+    state: present
+  register: installed_packages
+
+- name: print out installed packages
+  ansible.builtin.debug:
+    msg: "Following packages were installed: {{ installed_packages.changed_pkgs }}"
+  when: installed_packages.changed_pkgs|length > 0
+
+- name: retrieve installed casks
+  command: brew list --cask -1
+  register: installed_cask_packages
+
+- name: install cask packages
+  community.general.homebrew:
+    name: "{{ cask_packages|difference(installed_cask_packages.stdout_lines) | map('regex_replace', '^', 'homebrew/cask/') | list }}"
+    state: present
+  register: installed_cask_packages
+
+- name: print out installed packages
+  ansible.builtin.debug:
+    msg: "Following packages were installed: {{ installed_cask_packages.changed_pkgs }}"
+  when: installed_cask_packages.changed_pkgs|length > 0
