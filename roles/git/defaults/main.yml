@@ -5,7 +5,7 @@ gitignore_settings:
 
 git_profiles:
   - name: work
-    email: lehrmann@billiger-mietwagen.de
+    email: robin@whatwedo.ch
     username: Robin Lehrmann
   - name: home
     email: robin.lehrmann@developer.nrw
